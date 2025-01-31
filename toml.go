@@ -1,7 +1,6 @@
 package caddytomladapter
 
 import (
-	"bytes"
 	"encoding/json"
 
 	"github.com/caddyserver/caddy/v2/caddyconfig"
@@ -15,8 +14,7 @@ func init() {
 type Adapter struct{}
 
 func (a Adapter) Adapt(body []byte, m map[string]interface{}) ([]byte, []caddyconfig.Warning, error) {
-	buf := bytes.NewReader(body)
-	if err := toml.NewDecoder(buf).Decode(&m); err != nil {
+	if err := toml.Unmarshal(body, &m); err != nil {
 		return nil, nil, err
 	}
 
