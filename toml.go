@@ -2,6 +2,7 @@ package caddytomladapter
 
 import (
 	"encoding/json"
+	"log"
 
 	"github.com/caddyserver/caddy/v2/caddyconfig"
 	"github.com/pelletier/go-toml/v2"
@@ -19,6 +20,7 @@ func (a Adapter) Adapt(body []byte, m map[string]interface{}) ([]byte, []caddyco
 	}
 
 	b, err := json.Marshal(m)
+	log.Println(string(b))
 
 	return b, nil, err
 }
