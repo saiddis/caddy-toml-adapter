@@ -19,8 +19,9 @@ func (a Adapter) Adapt(body []byte, m map[string]interface{}) ([]byte, []caddyco
 		return nil, nil, err
 	}
 
+	delete(m, "filename")
 	b, err := json.Marshal(m)
-	log.Println(string(b))
+	log.Printf("config: %s", b)
 
 	return b, nil, err
 }
